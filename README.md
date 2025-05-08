@@ -16,3 +16,5 @@ Instructions:
 - Changing "size" automatically changes hitbox and laser positions for you.
 - "code" = level * 100 + model (i.e. where the ship is in the ship tree)
 - You don't need to fill in all of the text boxes, only the stats that you intend to modify. The exception is adding a new part to the ship, like a laser, in which case you should fill in the laser stats.
+
+![\[screenshot\]](https://raw.github.com/StormPetrel1/Starblast-Ship-JSON-Editor/master/screenshot.png?raw=true)
