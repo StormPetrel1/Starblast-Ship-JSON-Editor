@@ -1,3 +1,4 @@
+
 <html>
 	<head>
 		<title>Ship Export Modifier</title>
@@ -501,25 +502,6 @@
 		
 		<script> "use-strict";
 // BEGIN UN-INDENT
-
-
-
-/* Dependency graphs
-Some functions are meant to be called at multiple levels of abstraction
-Such functions should be extracted into modules to avoid spaghetti dependencies
-Dependency graphs at the function level should group entries by level of abstraction (starting with the highest level), to reduce indirection while reading
-This allows us to divide the program into small, bite-sized, reusable chunks, isolated from each other, without excessively breaking information flow
-
-Nevertheless we shouldn't prematurely optimize anything which could change, which means you may need to wait until something is used at multiple abstraction layers before you know it needs extracted into a module along with its dependencies
-At least now there is a measurable metric for isolation/abstraction!
-
-Since there is little code proximity advantage to sorting modules (the point of having modules is to separate code), and we want imports to be at the top of the file, several modules/imports within the same file will be sorted starting with the lowest level of abstraction
-This clearly shows how modules depend on each other while still allowing us to keep the lowest level isolated to the top of the file, out of the way
-Having a module/import embedded within the reading flow of some other code would only hinder its readability
-
-Within each abstraction tier, sort alphabetically, to make order deterministic
-Note: abstraction ordering can apply to variable ordering as well (with assignments being treated like new variables)
-*/
 
 
 
