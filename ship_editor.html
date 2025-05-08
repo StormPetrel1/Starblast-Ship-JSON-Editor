@@ -1,0 +1,892 @@
+
+<html>
+	<head>
+		<title>Ship Export Modifier</title>
+		<meta name="color-scheme" content="light dark">
+		<style>
+			button{
+				display: inline-block;
+				font-family:
+					"Georgia",
+					serif;
+				font-size: 15px;
+				padding-bottom: 2px;
+				padding-left: 7px;
+				padding-right: 7px;
+				padding-top: 2px;
+			}
+			code{
+				display: block;
+				font-family:
+					"Courier New",
+					monospace;
+				font-size: 16px;
+				padding-bottom: 8px;
+				padding-left: 4px;
+				padding-top: 8px;
+				tab-size: 2ch;
+				white-space: pre;
+			}
+			div{
+				padding-bottom: 2px;
+				padding-top: 2px;
+			}
+			input{
+				left: 256px;
+				position: absolute;
+				width: 128px;
+			}
+			label{
+				display: block;
+				font-family:
+					"Monaco",
+					"Courier New",
+					monospace;
+				font-size: 18px;
+				font-weight: bold;
+				padding-bottom: 2px;
+				padding-top: 2px;
+			}
+			textarea{
+				font-family:
+					"Courier New",
+					monospace;
+				width: 672px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div>
+			<label
+				for="mod_export"
+				style="padding-bottom: 4px;"
+			>Mod export here:</label>
+			<textarea
+				id="mod_export"
+				placeholder="var My_Ship_101 = '...';"
+				rows=6
+				spellcheck=false
+			></textarea>
+		</div>
+		
+		<div>
+			<button
+				id="view_stats"
+				type="button"
+			>View stats</button>
+			<button
+				id="hide_stats"
+				type="button"
+			>Hide stats</button>
+			<button
+				id="clear_mod_export"
+				type="button"
+			>Clear mod export</button>
+			<button
+				id="clear_fields"
+				type="button"
+			>Clear fields</button>
+			<div
+				id="copy_notif"
+				style="display: inline-block;"
+			></div>
+			<code id="stat_codebox"></code>
+		</div>
+		
+		<form id="form1">
+			<label>Name:
+				<input
+					name="name"
+					placeholder="My Ship"
+					spellcheck=false
+					style="width: 272px;"
+				>
+			</label>
+			
+			<label>Designer:
+				<input
+					name="designer"
+					placeholder="My Ship"
+					spellcheck=false
+					style="width: 272px;"
+				>
+			</label>
+			
+			<label>Code:
+				<input
+					max=999
+					min=101
+					name="code"
+					placeholder=101
+					type="number"
+				>
+			</label>
+			
+			<label>Next:
+				<input
+					max=999
+					min=101
+					name="next1"
+					placeholder=101
+					type="number"
+				>
+				<input
+					max=999
+					min=101
+					name="next2"
+					placeholder=101
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Size:
+				<input
+					name="size"
+					placeholder=1
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Zoom:
+				<input
+					name="zoom"
+					placeholder=1
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Shield capacity:
+				<input
+					name="shield_capacity1"
+					type="number"
+				>
+				<input
+					name="shield_capacity2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Shield regeneration:
+				<input
+					name="shield_regeneration1"
+					step="any"
+					type="number"
+				>
+				<input
+					name="shield_regeneration2"
+					step="any"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Energy capacity:
+				<input
+					name="energy_capacity1"
+					type="number"
+				>
+				<input
+					name="energy_capacity2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Energy regeneration:
+				<input
+					name="energy_regeneration1"
+					step="any"
+					type="number"
+				>
+				<input
+					name="energy_regeneration2"
+					step="any"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Mass:
+				<input
+					name="mass"
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Speed:
+				<input
+					name="speed1"
+					step="any"
+					type="number"
+				>
+				<input
+					name="speed2"
+					step="any"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Rotation:
+				<input
+					name="rotation1"
+					step="any"
+					type="number"
+				>
+				<input
+					name="rotation2"
+					step="any"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Acceleration:
+				<input
+					name="acceleration1"
+					step="any"
+					type="number"
+				>
+				<input
+					name="acceleration2"
+					step="any"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<div>
+				<button
+					id="apply_repairs"
+					type="button"
+				>Apply repairs</button>
+				<button
+					id="remove_next"
+					type="button"
+				>Remove next</button>
+				<button
+					id="remove_zoom"
+					type="button"
+				>Remove zoom</button>
+			</div>
+		</form>
+		
+		<form id="form2">
+			<label>Dash rate:
+				<input
+					name="dash_rate"
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Dash burst:
+				<input
+					name="dash_burst1"
+					type="number"
+				>
+				<input
+					name="dash_burst2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Dash speed:
+				<input
+					name="dash_speed1"
+					type="number"
+				>
+				<input
+					name="dash_speed2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Dash acceleration:
+				<input
+					name="dash_acceleration1"
+					type="number"
+				>
+				<input
+					name="dash_acceleration2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Dash initial energy:
+				<input
+					name="dash_initial_energy1"
+					type="number"
+				>
+				<input
+					name="dash_initial_energy2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Dash energy:
+				<input
+					name="dash_energy1"
+					type="number"
+				>
+				<input
+					name="dash_energy2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<div>
+				<button
+					id="apply_dash_stats"
+					type="button"
+				>Apply dash stats</button>
+				<button
+					id="remove_dash"
+					type="button"
+				>Remove dash</button>
+			</div>
+		</form>
+		
+		<form id="form3">
+			<label>Laser x, y, z:
+				<input
+					name="laser_x"
+					placeholder=0.0
+					step="any"
+					type="number"
+				>
+				<input
+					name="laser_y"
+					placeholder=-2.0
+					step="any"
+					style="left: 400px;"
+					type="number"
+				>
+				<input
+					name="laser_z"
+					placeholder=-0.25
+					step="any"
+					style="left: 544px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Laser angle:
+				<input
+					max=180
+					min=-180
+					name="laser_angle"
+					placeholder=0.0
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Damage:
+				<input
+					name="damage1"
+					step="any"
+					type="number"
+				>
+				<input
+					name="damage2"
+					step="any"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Laser rate:
+				<input
+					name="laser_rate"
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Laser type:
+				<input
+					max=2
+					min=1
+					name="laser_type"
+					placeholder=1
+					type="number"
+				>
+			</label>
+			
+			<label>Laser speed:
+				<input
+					name="laser_speed1"
+					type="number"
+				>
+				<input
+					name="laser_speed2"
+					style="left: 400px;"
+					type="number"
+				>
+			</label>
+			
+			<label>Laser count:
+				<input
+					min=1
+					name="laser_count"
+					placeholder=1
+					type="number"
+				>
+			</label>
+			
+			<label>Laser spread:
+				<input
+					max=180
+					min=-180
+					name="laser_spread"
+					placeholder=0.0
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Laser error:
+				<input
+					max=180
+					min=-180
+					name="laser_error"
+					placeholder=0.0
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<label>Recoil:
+				<input
+					name="recoil"
+					placeholder=0.0
+					step="any"
+					type="number"
+				>
+			</label>
+			
+			<div>
+				<button
+					id="add_single_laser"
+					type="button"
+				>Add single laser</button>
+				<button
+					id="add_mirrored_lasers"
+					type="button"
+				>Add mirrored lasers</button>
+				<button
+					id="repair_laser"
+					type="button"
+				>Repair laser at index:</button>
+				<input
+					min=0
+					placeholder=0
+					name="laser_index"
+					style="position: static;"
+					type="number"
+				>
+			</div>
+		</form>
+		
+		<script> "use-strict";
+// BEGIN UN-INDENT
+
+
+
+/*________________________________________________
+
+	Functional
+________________________________________________*/
+
+const compose = (fn1, fn2) => (...args) => fn2(fn1(...args));
+
+// removes undefineds
+const copy = (obj) => {
+	const result = {};
+	for(const [key, val] of Object.entries(obj)){
+		if(val !== undefined){
+			result[key] = val;
+		}
+	}
+	return result;
+};
+
+// doesn't modify any fields, but also doesn't completely deep copy
+// ignores undefined keys in obj2
+const deep_join = (under, over) => {
+	let copy;
+	if(typeof under === "object"){
+		copy = Array.isArray(under) & Array.isArray(over)
+			? [...under]
+			: {...under};
+	} else{
+		copy = Array.isArray(over) ? [] : {};
+	}
+	for(const [key, val] of Object.entries(over)){
+		if(val !== undefined){
+			copy[key] = typeof val === "object"
+				? deep_join(copy[key], val)
+				: val;
+		}
+	}
+	return copy;
+};
+
+const for_each_key = (obj, fn) => {
+	for(const [key, val] of Object.entries(obj)){
+		fn(val, key, obj);
+	}
+};
+
+/*________________________________________________
+
+	String manipulation
+________________________________________________*/
+
+const delim_extract = (str, delim) => {
+	const beginning = str.indexOf(delim) + 1;
+	const end = str.lastIndexOf(delim);
+	return str.substring(beginning, end);
+};
+
+const fancy_stringify = (obj, tabs = "") => {
+	let output = "";
+	for(const [key, val] of Object.entries(obj)){
+		const str = typeof val === "object"
+			? "{\n" + fancy_stringify(val, tabs + "\t") + tabs + "}"
+			: val;
+		output += tabs + key + ": " + str + "\n";
+	}
+	return output;
+};
+
+//************************************************
+
+/*________________________________________________
+
+	DOM helpers
+________________________________________________*/
+
+const combine_key_pairs = (obj) => {
+	const output = {};
+	for(const [key, val] of Object.entries(obj)){
+		const last_char = key.slice(-1);
+		const n = +last_char;
+		if(isNaN(n)){
+			output[key] = val;
+		} else{
+			const packed_key = key.slice(0, -1);
+			if(!output[packed_key]){
+				output[packed_key] = [undefined, undefined];
+			}
+			output[packed_key][n - 1] = val;
+		}
+	}
+	return output;
+};
+
+const get_form_data = (id) => {
+	const form = document.getElementById(id);
+	const form_data = new FormData(form);
+	const data = {};
+	for(const [key, val] of form_data.entries()){
+		if(val.length > 0){
+			const n = +val;
+			data[key] = isNaN(n) ? val : n;
+		}
+	}
+	return data;
+};
+
+//********************************
+
+const condense_form = compose(get_form_data, combine_key_pairs);
+
+const update_and_copy = (id, val) => {
+	const element = document.getElementById(id);
+	element.value = val;
+	return navigator.clipboard.writeText(val);
+};
+
+//************************************************
+
+/*________________________________________________
+
+	Events
+________________________________________________*/
+
+const default_laser = {
+	x: 0,
+	y: -2,
+	z: -0.25,
+	angle: 0,
+	type: 1,
+	number: 1,
+	spread: 0,
+	error: 0,
+	recoil: 0,
+};
+
+const empty_div = (div) => {div.innerText = "";};
+
+const get_mod_export = (ship) => {
+	const name = ship.name.replace(/[^0-9A-Za-z]/g, "_");
+	const identifier = name + "_" + ship.typespec.code;
+	const declaration = "var " + identifier + " = ";
+	const ship_json = JSON.stringify(ship);
+	return declaration + "'" + ship_json + "';\n";
+};
+
+//********************************
+
+const code_to_level = (code) => Math.floor(code / 100);
+
+const code_to_model = (code) => code % 100;
+
+const get_laser = () => {
+	const form = condense_form("form3");
+	const laser_data = {
+		x: form.laser_x,
+		y: form.laser_y,
+		z: form.laser_z,
+		angle: form.laser_angle,
+		damage: form.damage,
+		rate: form.laser_rate,
+		type: form.laser_type,
+		speed: form.laser_speed,
+		number: form.laser_count,
+		spread: form.laser_spread,
+		error: form.laser_error,
+		recoil: form.recoil,
+	};
+	return deep_join(default_laser, laser_data);
+};
+
+const get_ship = () => {
+	const mod_export = document.getElementById("mod_export").value;
+	const ship_json = delim_extract(mod_export, "'");
+	return JSON.parse(ship_json);
+};
+
+const get_ship_code = (level, model) => level * 100 + model;
+
+const update_mod_export = (ship, overlay) => {
+	const updated_ship = overlay ? deep_join(ship, overlay) : ship;
+	const mod_export = get_mod_export(updated_ship);
+	update_and_copy("mod_export", mod_export);
+	// UI fx
+	const codebox = document.getElementById("stat_codebox");
+	codebox.innerText = "";
+	const copy_notif = document.getElementById("copy_notif");
+	copy_notif.innerText = "Updated and copied to clipboard";
+	setTimeout(empty_div, 3000, copy_notif);
+};
+
+//********************************
+
+const event_listeners = {
+	add_mirrored_lasers: () => {
+		const laser = get_laser();
+		const mirrored_laser = {
+			...laser,
+			x: -laser.x,
+			angle: -laser.angle,
+		};
+		const ship = get_ship();
+		ship.typespec.lasers.push(laser);
+		ship.typespec.lasers.push(mirrored_laser);
+		update_mod_export(ship);
+	},
+	
+	add_single_laser: () => {
+		const ship = get_ship();
+		ship.typespec.lasers.push(get_laser());
+		update_mod_export(ship);
+	},
+	
+	apply_dash_stats: () => {
+		const form = condense_form("form2");
+		const specs = {
+			ship: {
+				dash: {
+					rate: form.dash_rate,
+					burst_speed: form.dash_burst,
+					speed: form.dash_speed,
+					acceleration: form.dash_acceleration,
+					initial_energy: form.dash_initial_energy,
+					energy: form.dash_energy,
+				},
+			},
+		};
+		const overlay = {
+			specs: specs,
+			typespec: {
+				specs: specs,
+			},
+		};
+		const ship = get_ship();
+		update_mod_export(ship, overlay);
+	},
+	
+	apply_repairs: () => {
+		const form = condense_form("form1");
+		const ship = get_ship();
+		const code = form.code ?? ship.typespec.code;
+		const size_ratio = (form.size ?? ship.size) / ship.size;
+		const specs = {
+			generator: {
+				capacity: form.energy_capacity,
+				reload: form.energy_regeneration,
+			},
+			shield: {
+				capacity: form.shield_capacity,
+				reload: form.shield_regeneration,
+			},
+			ship: {
+				acceleration: form.acceleration,
+				mass: form.mass,
+				rotation: form.rotation,
+				speed: form.speed,
+			},
+		};
+		const overlay = {
+			designer: form.designer,
+			level: code_to_level(code),
+			model: code_to_model(code),
+			name: form.name,
+			next: form.next,
+			size: form.size,
+			specs: specs,
+			typespec: {
+				code: code,
+				lasers: ship.typespec.lasers.map((laser) => {
+					return {
+						...laser,
+						x: laser.x * size_ratio,
+						y: laser.y * size_ratio,
+						z: laser.z * size_ratio,
+					};
+				}),
+				level: code_to_level(code),
+				model: code_to_model(code),
+				name: form.name,
+				next: form.next,
+				radius: ship.typespec.radius * size_ratio,
+				shape: ship.typespec.shape.map((n) => n * size_ratio),
+				specs: specs,
+			},
+			zoom: form.zoom,
+		};
+		update_mod_export(ship, overlay);
+	},
+	
+	clear_fields: () => {
+		var elements = document.getElementsByTagName("input");
+		for (const element of elements) {
+			element.value = "";
+		}
+	},
+	
+	clear_mod_export: () => {
+		const export_box = document.getElementById("mod_export");
+		export_box.value = "";
+		export_box.focus();
+	},
+	
+	hide_stats: () => {
+		const codebox = document.getElementById("stat_codebox");
+		codebox.innerText = "";
+	},
+	
+	remove_dash: () => {
+		const ship = get_ship();
+		if(ship.specs.ship.dash){
+			delete ship.specs.ship.dash;
+		}
+		if(ship.typespec.specs.ship.dash){
+			delete ship.typespec.specs.ship.dash;
+		}
+		update_mod_export(ship);
+	},
+	
+	remove_next: () => {
+		const ship = get_ship();
+		if(ship.next){
+			delete ship.next;
+		}
+		if(ship.typespec.next){
+			delete ship.typespec.next;
+		}
+		update_mod_export(ship);
+	},
+	
+	remove_zoom: () => {
+		const ship = get_ship();
+		if(ship.zoom){
+			delete ship.zoom;
+		}
+		update_mod_export(ship);
+	},
+	
+	repair_laser: () => {
+		const assignments = {typespec: {lasers: []}};
+		const form = condense_form("form3");
+		assignments.typespec.lasers[form.laser_index] = {
+			angle: form.laser_angle,
+			damage: form.damage,
+			error: form.laser_error,
+			number: form.laser_count,
+			rate: form.laser_rate,
+			recoil: form.recoil,
+			speed: form.laser_speed,
+			spread: form.laser_spread,
+			type: form.laser_type,
+			x: form.laser_x,
+			y: form.laser_y,
+			z: form.laser_z,
+		};
+		const ship = get_ship();
+		update_mod_export(ship, assignments);
+	},
+	
+	view_stats: () => {
+		const ship = get_ship();
+		const {
+			bodies: _1,
+			typespec: _2,
+			wings: _3,
+			...template
+		} = ship;
+		template.lasers = ship.typespec.lasers;
+		const codebox = document.getElementById("stat_codebox");
+		codebox.innerText = fancy_stringify(template);
+	},
+};
+	
+const init_button_fx = (val, key) => {
+	const button = document.getElementById(key);
+	button.addEventListener("click", val);
+};
+
+//********************************
+
+for_each_key(event_listeners, init_button_fx);
+
+
+
+// END UN-INDENT
+		</script>
+	</body>
+</html>
